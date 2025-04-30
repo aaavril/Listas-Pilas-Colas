@@ -33,6 +33,35 @@ public class Ejercicios
 	        return null;
 	    }
 
+	    Nodo actualOriginal = original;
+	    
+	    Nodo anteriorNuevo = new Nodo();
+	    anteriorNuevo.setValor(original.getValor());
+	    
+	    Nodo actualNuevo = new Nodo();
+
+	    while (actualOriginal != null) {
+	        Nodo nuevoNodo = new Nodo();
+	        nuevoNodo.setValor(actualOriginal.getValor());
+
+	        actualNuevo.setSiguiente(nuevoNodo);
+
+	        actualNuevo = nuevoNodo;
+	        actualOriginal = actualOriginal.getSiguiente();
+	    }
+
+	    return actualNuevo;
+	}
+
+	
+	//Ejercicio 3 – Invertir la lista
+	// Crear un método que genere una nueva lista con los mismos valores pero en orden inverso.
+	// nombre del método: public Lista invertir()
+	public Nodo invertirLista(Nodo original) {
+	    if (original == null) {
+	        return null;
+	    }
+	    
 	    Nodo nuevoInicio = new Nodo();
 	    nuevoInicio.setValor(original.getValor());
 
@@ -52,13 +81,6 @@ public class Ejercicios
 	    return nuevoInicio;
 	}
 
-	
-	//Ejercicio 3 – Invertir la lista
-	// Crear un método que genere una nueva lista con los mismos valores pero en orden inverso.
-	// nombre del método: public Lista invertir()
-	//public Nodo invertir() 
-	{
-	}
 	//Ejercicio 4 –Sumar los valores en posiciones pares
 	//Crear un método que sume los valores de los nodos ubicados en posiciones pares (0, 2, 4, ...).
 	//nombre del método: public int sumaPosicionesPares()
