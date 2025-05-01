@@ -29,39 +29,8 @@ public class Ejercicios
 	//nombre del método: public Lista clonarLista()
 	
 	public Nodo clonarLista(Nodo original) {
-	    if (original == null) {
-	        return null;
-	    }
+	    if (original == null) return null;
 
-	    Nodo actualOriginal = original;
-	    
-	    Nodo anteriorNuevo = new Nodo();
-	    anteriorNuevo.setValor(original.getValor());
-	    
-	    Nodo actualNuevo = new Nodo();
-
-	    while (actualOriginal != null) {
-	        Nodo nuevoNodo = new Nodo();
-	        nuevoNodo.setValor(actualOriginal.getValor());
-
-	        actualNuevo.setSiguiente(nuevoNodo);
-
-	        actualNuevo = nuevoNodo;
-	        actualOriginal = actualOriginal.getSiguiente();
-	    }
-
-	    return actualNuevo;
-	}
-
-	
-	//Ejercicio 3 – Invertir la lista
-	// Crear un método que genere una nueva lista con los mismos valores pero en orden inverso.
-	// nombre del método: public Lista invertir()
-	public Nodo invertirLista(Nodo original) {
-	    if (original == null) {
-	        return null;
-	    }
-	    
 	    Nodo nuevoInicio = new Nodo();
 	    nuevoInicio.setValor(original.getValor());
 
@@ -71,11 +40,28 @@ public class Ejercicios
 	    while (actualOriginal != null) {
 	        Nodo nuevoNodo = new Nodo();
 	        nuevoNodo.setValor(actualOriginal.getValor());
-
 	        actualNuevo.setSiguiente(nuevoNodo);
-
 	        actualNuevo = nuevoNodo;
 	        actualOriginal = actualOriginal.getSiguiente();
+	    }
+
+	    return nuevoInicio;
+	}
+
+
+	
+	//Ejercicio 3 – Invertir la lista
+	// Crear un método que genere una nueva lista con los mismos valores pero en orden inverso.
+	// nombre del método: public Lista invertir()
+	public Nodo invertirLista(Nodo original) {
+	    Nodo nuevoInicio = null;
+
+	    while (original != null) {
+	        Nodo nuevoNodo = new Nodo();
+	        nuevoNodo.setValor(original.getValor());
+	        nuevoNodo.setSiguiente(nuevoInicio);
+	        nuevoInicio = nuevoNodo; 
+	        original = original.getSiguiente();
 	    }
 
 	    return nuevoInicio;
@@ -85,10 +71,22 @@ public class Ejercicios
 	//Crear un método que sume los valores de los nodos ubicados en posiciones pares (0, 2, 4, ...).
 	//nombre del método: public int sumaPosicionesPares()
 	
-	//public int sumaPosicionesPares()
-		{
-			
-		}
+	public int sumaPosicionesPares(Nodo nodo) {
+	    int suma = 0;
+	    int posicion = 0;
+	    Nodo actual = nodo;
+
+	    while (actual != null) {
+	        if (posicion % 2 == 0) {
+	            suma += actual.getValor();
+	        }
+	        actual = actual.getSiguiente();
+	        posicion++;
+	    }
+
+	    return suma;
+	}
+
 
 	
 	public static void main(String[] args) 
@@ -115,17 +113,33 @@ public class Ejercicios
 	   
 	    boolean resultado = true;
 	    
-	    while (nodo1 != null && nuevo != null) {
-	    	if (nodo1.getValor() != nuevo.getValor()) 
+	    Nodo copiaOriginal = nodo1;
+	    while (copiaOriginal != null && nuevo != null) 
+	    {
+	    	if (copiaOriginal.getValor() != nuevo.getValor()) 
 	    	{
 	    		resultado = false;
 	    		break;
 	    	}
-            nodo1 = nodo1.getSiguiente();
+	    	copiaOriginal = copiaOriginal.getSiguiente();
             nuevo = nuevo.getSiguiente();
 	        }
 	    
-	    System.out.print("La primera lista es igual a la segunda?: " + resultado);
+	    System.out.println("La primera lista es igual a la segunda?: " + resultado);
+	    
+	  // Ejercicio 3
+	    Nodo invertida = ejercicios.invertirLista(nodo1);
+	    System.out.println("Lista invertida: ");
+	    while (invertida != null) {
+	        System.out.println(invertida.getValor() + " ");
+	        invertida = invertida.getSiguiente();
+	    }
+
+	    
+	    //Ejercicio 4
+		int sumaPares = ejercicios.sumaPosicionesPares(nodo1);
+		System.out.println("Suma de valores en posiciones pares: " + sumaPares);
+
 	  }
 
 }
